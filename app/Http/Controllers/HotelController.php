@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
-    public function index()
+    public function index($countryId = null)
     {
-        $hotels = Hotel::all();
-
+        if ($countryId) {
+            $hotels = Hotel::where('country_id', $countryId)->get();
+        } else {
+            $hotels = Hotel::all();
+        }
         return view('hotels.index', ['hotels' => $hotels]);
     }
 

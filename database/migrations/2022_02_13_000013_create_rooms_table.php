@@ -17,8 +17,9 @@ class CreateRoomsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->enum('bed',['одноместная','двухместная']);
+            $table->string('bed');
             $table->integer('area');
+            $table->foreignId('hotel_id')->constrained();
         });
     }
 

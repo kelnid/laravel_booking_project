@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    public function index()
+    public function index($hotelId = null)
     {
-        return view('rooms.index');
+        if ($hotelId) {
+            $rooms = Room::where('hotel_id', $hotelId)->get();
+        } else {
+            $rooms = Room::all();
+        }
+
+        return view('rooms.index', ['rooms' => $rooms]);
     }
 
     public function create()
@@ -23,7 +30,9 @@ class RoomController extends Controller
 
     public function show($id)
     {
-        //
+        $room = Room::find($id);
+
+        return view('rooms.show', ['room' => $room]);
     }
 
     public function edit($id)
