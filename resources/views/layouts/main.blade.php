@@ -21,6 +21,9 @@
                     <a class="nav-link" href="{{ route('countries.index') }}">Главная</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('countries.create') }}">Добавить страну</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('hotels.create') }}">Добавить отель</a>
                 </li>
                 <li class="nav-item">

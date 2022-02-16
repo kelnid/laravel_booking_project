@@ -9,6 +9,8 @@ class Hotel extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'address', 'description', 'country_id'];
+
     public function country()
     {
         return $this->belongsTo(Country::class);

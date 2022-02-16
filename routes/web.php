@@ -5,12 +5,14 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', [CountryController::class, 'index']);
+
 Route::group([
     'as' => 'countries.',
     'prefix' => 'countries',
 ], function() {
     Route::get('/', [CountryController::class, 'index'])->name('index');
-    Route::get('/create', [CountryController::class, 'create'])->name('create');
+    Route::get('/create/test', [CountryController::class, 'create'])->name('create');
     Route::post('/', [CountryController::class, 'store'])->name('store');
     Route::get('/{country}', [CountryController::class, 'show'])->name('show');
     Route::get('/{country}/edit', [CountryController::class, 'edit'])->name('edit');
@@ -23,7 +25,7 @@ Route::group([
     'prefix' => 'hotels',
 ], function() {
     Route::get('/{country?}', [HotelController::class, 'index'])->name('index');
-    Route::get('/create', [HotelController::class, 'create'])->name('create');
+    Route::get('/create/test', [HotelController::class, 'create'])->name('create');
     Route::post('/', [HotelController::class, 'store'])->name('store');
     Route::get('/show/{hotel}', [HotelController::class, 'show'])->name('show');
     Route::get('/{hotel}/edit', [HotelController::class, 'edit'])->name('edit');
@@ -36,7 +38,7 @@ Route::group([
     'prefix' => 'rooms',
 ], function() {
     Route::get('/{hotel?}', [RoomController::class, 'index'])->name('index');
-    Route::get('/create', [RoomController::class, 'create'])->name('create');
+    Route::get('/create/test', [RoomController::class, 'create'])->name('create');
     Route::post('/', [RoomController::class, 'store'])->name('store');
     Route::get('/show/{room}', [RoomController::class, 'show'])->name('show');
     Route::get('/{room}/edit', [RoomController::class, 'edit'])->name('edit');

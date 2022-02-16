@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use App\Models\Hotel;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -12,17 +11,22 @@ class CountryController extends Controller
     {
         $countries = Country::all();
 
-        return view('countries', ['countries' => $countries]);
+        return view('countries.index', ['countries' => $countries]);
     }
 
     public function create()
     {
-      //
+        $countries = Country::all();
+
+        return view('countries.create', ['countries' => $countries]);
     }
 
     public function store(Request $request)
     {
-        dd($request->all());
+        $data = $request->except('_token');
+        Country::create($data);
+
+        return redirect()->route('countries.index');
     }
 
     public function show($id)
