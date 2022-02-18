@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Hotel;
+use App\Models\Room;
+use Illuminate\Http\Request;
+
+class RoomController extends Controller
+{
+    public function index($hotelId = null)
+    {
+        if ($hotelId) {
+            $rooms = Room::where('hotel_id', $hotelId)->get();
+        } else {
+            $rooms = Room::all();
+        }
+
+        return view('rooms.index', ['rooms' => $rooms]);
+    }
+
+    public function create()
+    {
+        $hotels = Hotel::all();
+
+        return view('rooms.create', ['hotels' => $hotels]);
+    }
+
+    public function store(Request $request)
+    {
+        Room::create([
+            'name' => $request->name,
+            'bed' => $request->bed,
+            'area' => $request->area,
+            'hotel_id' => $request->hotel,
+        ]);
+
+        return redirect()->route('countries.index');
+    }
+
+    public function show($id)
+    {
+        $room = Room::find($id);
+
+        return view('rooms.show', ['room' => $room]);
+    }
+
+    public function edit($id)
+    {
+        $room = Room::find($id);
+
+        return view('rooms.edit', ['room' => $room]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->except('_token', '_method');
+        $room = Room::find($id);
+        $room->update($data);
+
+        return redirect()->route('rooms.show', ['room' => $id]);
+    }
+
+    public function destroy($id)
+    {
+        $room = Room::find($id);
+        $room->delete();
+
+        return redirect()->route('countries.index');
+    }
+}
