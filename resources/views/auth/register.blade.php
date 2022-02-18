@@ -25,7 +25,7 @@
                                 </div>
                             </div>
 
-                            <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
+                          
 
 
                             <div class="row mb-3">
