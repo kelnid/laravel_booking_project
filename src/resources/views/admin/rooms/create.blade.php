@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('user.layouts.main')
 
 @section('title', 'Создать задачу')
 
