@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HotelRequest;
 use App\Models\Country;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class HotelController extends Controller
         return view('admin.hotels.create', ['countries' => $countries]);
     }
 
-    public function store(Request $request)
+    public function store(HotelRequest $request)
     {
         Hotel::create([
             'name' => $request->name,

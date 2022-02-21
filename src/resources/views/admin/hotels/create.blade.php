@@ -8,15 +8,24 @@
             @csrf
             <div class="form-group">
                 <label for="name">Название</label>
-                <input type="text"  name="name" placeholder="Название">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Название">
+                @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="description">Описание</label>
-                <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+                <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3" name="description"></textarea>
+                @error('description')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="name">Адрес</label>
-                <input type="text" name="address" placeholder="Адрес">
+                <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Адрес">
+                @error('address')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="country">Страна</label>
