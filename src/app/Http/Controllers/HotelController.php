@@ -54,6 +54,13 @@ class HotelController extends Controller
         return view('admin.hotels.show', ['hotel' => $hotel]);
     }
 
+    public function showHotel($id)
+    {
+        $hotel = Hotel::find($id);
+
+        return view('user.hotels.show', ['hotel' => $hotel]);
+    }
+
     public function edit($id)
     {
         $hotel = Hotel::find($id);

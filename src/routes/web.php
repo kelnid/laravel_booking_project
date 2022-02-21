@@ -69,6 +69,7 @@ Route::group([
         'prefix' => 'hotels',
     ], function () {
         Route::get('/{country?}', [HotelController::class, 'indexHotel'])->name('index');
+        Route::get('/show/{hotel}', [HotelController::class, 'showHotel'])->name('show');
     });
 
     Route::group([
@@ -76,6 +77,7 @@ Route::group([
         'prefix' => 'rooms',
     ], function () {
         Route::get('/{hotel?}', [RoomController::class, 'indexRooms'])->name('index');
+        Route::get('/show/{room}', [RoomController::class, 'showRoom'])->name('show');
     });
 });
 

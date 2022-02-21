@@ -56,6 +56,13 @@ class RoomController extends Controller
         return view('admin.rooms.show', ['room' => $room]);
     }
 
+    public function showRoom($id)
+    {
+        $room = Room::find($id);
+
+        return view('user.rooms.show', ['room' => $room]);
+    }
+
     public function edit($id)
     {
         $room = Room::find($id);
