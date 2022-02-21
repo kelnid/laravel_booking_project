@@ -47,7 +47,6 @@
                             @csrf
                         </form>
                     </li>
-                    <span style="color: #fff">Добро пожаловать, {{ auth()->user()->name }}</span>
                 @endguest
             </ul>
         </div>
