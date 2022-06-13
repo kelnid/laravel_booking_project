@@ -103,6 +103,8 @@ Route::group([
 Auth::routes();
 
 Route::get('auth/activate', [App\Http\Controllers\Auth\ActivationController::class, 'activate'])->name('auth.activate');
+Route::get('auth/activate/resend', [App\Http\Controllers\Auth\ActivationResendController::class, 'showResendForm'])->name('auth.activate.resend');
+Route::post('auth/activate/resend', [App\Http\Controllers\Auth\ActivationResendController::class, 'resend']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

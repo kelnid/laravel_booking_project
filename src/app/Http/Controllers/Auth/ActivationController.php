@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ActivationController extends Controller
 {
-    public function activate(Request $request) {
+    public function activate(Request $request)
+    {
         $user = User::where('email', $request->email)->where('activation_token', $request->token)->firstOrFail();
 
         $user->update ([
