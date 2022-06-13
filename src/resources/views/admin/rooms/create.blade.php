@@ -28,6 +28,13 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="price">Цена</label>
+                <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Price">
+                @error('price')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="hotel">Отель</label>
                 <select class="form-control" id="hotel" name="hotel">
                     @foreach($hotels as $hotel)

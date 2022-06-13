@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container create-task-block">
-        <form method="POST" action="{{ route('admin.hotels.store') }}" class="create-task-form">
+        <form method="POST" action="{{ route('admin.hotels.store') }}" class="create-task-form" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Название</label>
@@ -29,11 +29,17 @@
             </div>
             <div class="form-group">
                 <label for="country">Страна</label>
-                <select class="form-control" id="country" name="country">
+                <select class="form-control" id="country_id" name="country_id">
                     @foreach($countries as $country)
                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                @error('image')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Создать</button>
         </form>

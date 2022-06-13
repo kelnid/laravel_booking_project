@@ -25,8 +25,9 @@ class HotelRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:20',
-            'address' => 'required|string|min:3|max:20',
-            'description' => 'required|string|min:3|max:20'
+            'address' => 'required|string|min:3',
+            'description' => 'required|string|min:3',
+            'image' => 'required|image'
         ];
     }
     public function messages()
@@ -35,6 +36,7 @@ class HotelRequest extends FormRequest
             'name.required' => 'Нужно заполнить название',
             'address.required' => 'Нужно заполнить адрес',
             'description.required' => 'Нужно заполнить описание',
+            'image.required' => 'Нужно добавить картинку'
         ];
     }
 }

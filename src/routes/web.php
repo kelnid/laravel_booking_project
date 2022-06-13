@@ -7,12 +7,12 @@ use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [CountryController::class, 'index']);
+Route::get('/', [CountryController::class, 'indexCountries']);
 
 Route::group([
     'as' => 'admin.',
     'prefix' => 'admin',
-    'middleware' => 'admin'
+    'middleware' => ['admin'],
 ], function () {
     Route::group([
         'as' => 'countries.',
@@ -24,7 +24,7 @@ Route::group([
         Route::get('/{country}', [CountryController::class, 'show'])->name('show');
         Route::get('/{country}/edit', [CountryController::class, 'edit'])->name('edit');
         Route::put('/{country}', [CountryController::class, 'update'])->name('update');
-        Route::delete('/{country}', [CountryController::class, 'destroy'])->name('destroy');
+        Route::delete('{country}', [CountryController::class, 'destroy'])->name('destroy');
     });
 
     Route::group([
@@ -71,6 +71,7 @@ Route::group([
         'prefix' => 'countries',
     ], function () {
         Route::get('/', [CountryController::class, 'indexCountries'])->name('index');
+        Route::get('/search', [CountryController::class, 'search'])->name('search');
     });
 
     Route::group([
@@ -101,4 +102,7 @@ Route::group([
 
 Auth::routes();
 
+Route::get('auth/activate', [App\Http\Controllers\Auth\ActivationController::class, 'activate'])->name('auth.activate');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

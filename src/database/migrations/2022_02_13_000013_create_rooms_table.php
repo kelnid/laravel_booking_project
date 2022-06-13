@@ -19,6 +19,7 @@ class CreateRoomsTable extends Migration
             $table->string('name');
             $table->string('bed');
             $table->integer('area');
+            $table->integer('price');
             $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
         });
     }

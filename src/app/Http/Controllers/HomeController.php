@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -24,8 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $countries = Country::all();
-
-        return view('user.countries.index', ['countries' => $countries]);
+        return view('user.countries.index');
     }
 }

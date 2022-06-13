@@ -19,7 +19,8 @@ class CreateHotelsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->text('description');
-            $table->foreignId('country_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('image')->nullable();
+            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

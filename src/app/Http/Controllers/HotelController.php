@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\HotelRequest;
 use App\Models\Country;
 use App\Models\Hotel;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
-    public function index($countryId = null)
+    public function index($countryId = null, $hotelId = null)
     {
         if ($countryId) {
             $hotels = Hotel::where('country_id', $countryId)->get();
         } else {
             $hotels = Hotel::all();
         }
-        return view('admin.hotels.index', ['hotels' => $hotels]);
+
+        if ($hotelId) {
+            $rooms = Room::where('hotel_id', $hotelId)->get();
+        } else {
+            $rooms = Room::all();
+        }
+        return view('admin.hotels.index', ['hotels' => $hotels], ['rooms' => $rooms]);
     }
 
     public function indexHotel($countryId = null)
@@ -38,21 +45,26 @@ class HotelController extends Controller
 
     public function store(HotelRequest $request)
     {
-        Hotel::create([
-            'name' => $request->name,
-            'address' => $request->address,
-            'description' => $request->description,
-            'country_id' => $request->country,
-        ]);
+        $data = $request->except('_token');
+
+        $data['image'] = $request->file('image')->store('images');
+
+        Hotel::create($data);
 
         return redirect()->route('admin.countries.index');
     }
 
-    public function show($id)
+    public function show($id, $hotelId = null)
     {
         $hotel = Hotel::find($id);
 
-        return view('admin.hotels.show', ['hotel' => $hotel]);
+        if ($hotelId) {
+            $rooms = Room::where('hotel_id', $hotelId)->get();
+        } else {
+            $rooms = Room::all();
+        }
+
+        return view('admin.hotels.show', ['hotel' => $hotel], ['rooms' => $rooms]);
     }
 
     public function showHotel($id)
@@ -73,6 +85,9 @@ class HotelController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->except('_token', '_method');
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images');
+        }
         $hotel = Hotel::find($id);
         $hotel->update($data);
 

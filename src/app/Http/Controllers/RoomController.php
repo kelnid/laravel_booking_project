@@ -11,17 +11,6 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    public function index($hotelId = null)
-    {
-        if ($hotelId) {
-            $rooms = Room::where('hotel_id', $hotelId)->get();
-        } else {
-            $rooms = Room::all();
-        }
-
-        return view('admin.rooms.index', ['rooms' => $rooms]);
-    }
-
     public function indexRooms($hotelId = null)
     {
         if ($hotelId) {
@@ -46,10 +35,11 @@ class RoomController extends Controller
             'name' => $request->name,
             'bed' => $request->bed,
             'area' => $request->area,
+            'price' => $request->price,
             'hotel_id' => $request->hotel,
         ]);
 
-        return redirect()->route('admin.countries.index');
+        return redirect()->route('admin.hotels.index');
     }
 
     public function show($id)

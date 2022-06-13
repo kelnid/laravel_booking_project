@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\SendVerifyWithQueueNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = ['last_name','first_name','name', 'email', 'password', 'role_id'];
+    protected $fillable = ['name', 'email', 'password', 'role_id', 'activation_token', 'active'];
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -26,4 +27,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
+
+//    public function sendEmailVerificationNotification()
+//    {
+//        $this->notify(new SendVerifyWithQueueNotification());//переопределяем метод
+//    }
 }

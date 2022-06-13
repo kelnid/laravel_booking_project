@@ -21,6 +21,15 @@ class CountryController extends Controller
         return view('user.countries.index', ['countries' => $countries]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+//        dd($search);
+        $countries = Country::where('name', 'LIKE', "%{$search}%")->orderBy('name')->get();
+
+        return view('user.countries.index', compact('countries'));
+    }
+
     public function create()
     {
         $countries = Country::all();
@@ -38,22 +47,20 @@ class CountryController extends Controller
 
         return redirect()->route('admin.countries.index');
     }
-    public function show($id)
-    {
-        $country = Country::find($id);
-
-        return view('admin.countries.show', ['country' => $country]);
-    }
     public function edit($id)
     {
         $country = Country::find($id);
 
         return view('admin.countries.edit', ['country' => $country]);
+
     }
 
     public function update(Request $request, $id)
     {
         $data = $request->except('_token', '_method');
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images');
+        }
         $country = Country::find($id);
         $country->update($data);
 
@@ -63,6 +70,7 @@ class CountryController extends Controller
     public function destroy($id)
     {
         $country = Country::find($id);
+
         $country->delete();
 
         return redirect()->route('admin.countries.index');

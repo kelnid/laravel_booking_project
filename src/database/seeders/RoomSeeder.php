@@ -16,22 +16,11 @@ class RoomSeeder extends Seeder
      */
     public function run()
     {
-//        DB::table('rooms')->insert([
-//            ['name' => 'Одноместный', 'bed' => 'Одноместная', 'area' => '12'],
-//            ['name' => 'Люкс', 'bed' => 'Одноместная', 'area' => '13'],
-//            ['name' => 'Гипер-люкс', 'bed' => 'Одноместная', 'area' => '14'],
-//            ['name' => 'Супер-люкс', 'bed' => 'Одноместная', 'area' => '15'],
-//        ]);
-        $hotelIds = DB::table('hotels')->pluck('id')->toArray();
-
-        for ($i = 0; $i <= 10; $i++) {
-            DB::table('rooms')->insert([
-                'name' => Str::random(10),
-                'bed' => Str::random(10),
-                'area' => '12',
-                'hotel_id' => $hotelIds[array_rand($hotelIds)],
-                'created_at' => Carbon::parse(),
-            ]);
-        }
+        DB::table('rooms')->insert([
+            ['name' => 'Стандартный двухместный номер', 'bed' => '1 большая двуспальная кровать', 'area' => '26', 'price' => '2000','hotel_id' => 1],
+            ['name' => 'Улучшенный двухместный номер с 2 отдельными кроватями', 'bed' => '2 односпальные кровати', 'area' => '42', 'price' => '2000','hotel_id' => 1],
+            ['name' => 'Суперлюкс', 'bed' => '1 диван-кровать и 1 большая двуспальная кровать', 'area' => '65', 'price' => '2000','hotel_id' => 1],
+            ['name' => 'Представительский люкс', 'bed' => 'Спальня 1: 1 диван-кровать  и 1 большая двуспальная кровать  Гостиная: 1 диван-кровать', 'area' => '80', 'price' => '2000','hotel_id' => 1],
+        ]);
     }
 }

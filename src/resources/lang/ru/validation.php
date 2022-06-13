@@ -15,13 +15,13 @@ return [
 
     'accepted'             => 'Вы должны принять :attribute.',
     'active_url'           => 'Поле :attribute is not a valid URL.',
-    'after'                => 'Поле :attribute должно быть датой после :date.',
+    'after'                => 'Дата выезда должна быть после даты заезда.',
     'after_or_equal'       => 'Поле :attribute должно быть датой после или равной :date.',
     'alpha'                => 'Поле :attribute может содержать только буквы.',
     'alpha_dash'           => 'Поле :attribute может содержать только буквы, цифры, дефис и подчеркивание.',
     'alpha_num'            => 'Поле :attribute может содержать только буквы и цифры.',
     'array'                => 'Поле :attribute должно быть массивом.',
-    'before'               => 'Поле :attribute должно быть датой перед :date.',
+    'before'               => 'Дата заезда должна быть перед датой выселения.',
     'before_or_equal'      => 'Поле :attribute должно быть датой перед или равной :date.',
     'between' => [
         'numeric' => 'Поле :attribute должно быть между :min и :max.',
