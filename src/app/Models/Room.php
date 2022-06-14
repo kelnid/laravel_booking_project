@@ -19,4 +19,12 @@ class Room extends Model
     {
         return $this->hasMany(Booking::class);
     }
+    public function roomImages()
+    {
+        return $this->hasMany(RoomImage::class);
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->using(RoomUser::class);
+    }
 }

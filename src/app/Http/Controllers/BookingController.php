@@ -5,24 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookingRequest;
 use App\Models\Booking;
 use App\Models\Room;
+use App\Models\RoomUser;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
-class BookingController extends Controller
+class BookingController extends Controller implements ShouldQueue
 {
-//    public function create()
-//    {
-//        $bookings = Booking::all();
-//
-//        return view('admin.bookings.create', ['bookings' => $bookings]);
-//    }
+    public function index()
+    {
+        $rooms = Room::whereHas('users', function (Builder $query) {
+            $query->where('user_id', auth()->user()->id);
+        })->get();
+        $bookings = Booking::all();
 
-    public function store(BookingRequest $request)
+        return view('user.bookings.index', ['rooms' => $rooms], ['bookings' => $bookings]);
+    }
+
+    public function storeBooking(BookingRequest $request)
     {
         $data = $request->except('_token');
-
-        $data['user_id'] = Auth::user()->id;
+        $data['user_id'] = auth()->user()->id;
+        RoomUser::create($data);
+//        return redirect()->route('hotels.bookings.index');
 
         $roomId = $data['room_id'];
 
@@ -35,7 +42,7 @@ class BookingController extends Controller
             $message->from('from.palmo@gmail.com', 'FROM PALMO');
         });
 
-        return redirect()->route('user.rooms.show', ['room' => $request->room_id]);
+        return redirect()->route('hotels.bookings.index', ['room' => $request->room_id]);
     }
 
     public function update(Request $request, $id)
@@ -47,6 +54,15 @@ class BookingController extends Controller
         $booking->update($data);
 
         return redirect()->route('user.bookings.index', ['booking' => $id]);
+    }
+
+    public function destroy($id)
+    {
+//        Booking::find($id)->delete();
+
+        RoomUser::where('room_id', $id)->where('user_id', auth()->user()->id)->delete();
+
+        return redirect()->route('hotels.bookings.index');
     }
 }
 

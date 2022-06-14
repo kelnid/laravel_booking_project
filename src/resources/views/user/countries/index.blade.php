@@ -32,22 +32,15 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     @foreach($countries as $country)
                         <div class="col">
-                            <div class="card shadow-sm">
-                                <div style="position: relative; text-align: center; color: black; font-size: larger">
-                                    <img src="{{ asset("storage/$country->image") }}" class="img-fluid rounded-start"
-                                         alt="{{ $country->name }} " style="width: 420px; height: 237px">
-                                    <div class="top-left"
-                                         style="position: absolute; top: 8px; left: 16px;">{{ $country->name }}</div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="{{ route('user.hotels.index', ['country' => $country->id]) }}"
-                                               class="btn btn-sm btn-outline-secondary stretched-link">view</a>
-                                        </div>
+                            <a href="{{ route('user.hotels.index', ['country' => $country->id]) }}">
+                                <div class="card shadow-sm">
+                                    <div style="position: relative; text-align: center; color: black; font-size: larger">
+                                        <img src="{{ asset("storage/$country->image") }}" class="img-fluid rounded-start"
+                                             alt="{{ $country->name }} " >
+                                        <div class="top-left" style="position: absolute; top: 8px; left: 16px;">{{ $country->name }}</div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>

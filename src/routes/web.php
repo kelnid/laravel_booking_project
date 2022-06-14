@@ -100,9 +100,23 @@ Route::group([
     });
 });
 
+Route::group([
+    'as' => 'hotels.',
+    'prefix' => 'hotels'
+], function () {
+    Route::group([
+        'as' => 'bookings.',
+        'prefix' => 'bookings'
+    ], function () {
+        Route::get('/my-bookings', [BookingController::class, 'index'])->name('index');
+        Route::post('/', [BookingController::class, 'storeBooking'])->name('storeBooking');
+        Route::delete('/destroy/{room}', [BookingController::class, 'destroy'])->name('destroy');
+    });
+});
+
 Auth::routes();
 
-Route::get('auth/activate', [App\Http\Controllers\Auth\ActivationController::class, 'activate'])->name('auth.activate');
+Route::get('auth/activate', [App\Http\Controllers\Auth\ActivationController::class, 'activate'])->name('activate');
 Route::get('auth/activate/resend', [App\Http\Controllers\Auth\ActivationResendController::class, 'showResendForm'])->name('auth.activate.resend');
 Route::post('auth/activate/resend', [App\Http\Controllers\Auth\ActivationResendController::class, 'resend']);
 

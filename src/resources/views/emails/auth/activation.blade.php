@@ -3,7 +3,7 @@
 
 Благодарим за регистрацию на сайте Travelmore.com, пожалуйста активируйте ваш аккаунт
 
-@component('mail::button', ['url' => route('auth.activate', ['token' => $user->activation_token,'email' => $user->email])])
+@component('mail::button', ['url' => route('activate', ['token' => $user->activation_token,'email' => $user->email])])
     Активировать
 @endcomponent
 

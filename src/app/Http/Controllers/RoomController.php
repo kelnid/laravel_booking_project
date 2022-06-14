@@ -6,6 +6,7 @@ use App\Http\Requests\RoomRequest;
 use App\Models\Booking;
 use App\Models\Hotel;
 use App\Models\Room;
+use App\Models\RoomImage;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -54,8 +55,9 @@ class RoomController extends Controller
     public function showRoom($id)
     {
         $room = Room::find($id);
+        $images = RoomImage::all();
 
-        return view('user.rooms.show', ['room' => $room]);
+        return view('user.rooms.show', ['room' => $room, 'images' => $images]);
     }
 
     public function edit($id)

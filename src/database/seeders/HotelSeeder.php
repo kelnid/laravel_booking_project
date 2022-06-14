@@ -16,17 +16,6 @@ class HotelSeeder extends Seeder
      */
     public function run()
     {
-//        $countryIds = DB::table('countries')->pluck('id')->toArray();
-//
-//        for ($i = 0; $i <= 4; $i++) {
-//            DB::table('hotels')->insert([
-//                'name' => Str::random(10),
-//                'address' => Str::random(10),
-//                'description' => Str::random(30),
-//                'country_id' => $countryIds[array_rand($countryIds)],
-//                'created_at' => Carbon::parse(),
-//            ]);
-//        }
         DB::table('hotels')->insert([
             ['name' => 'Спа-Готель Потоки Хауз',
                 'address' => 'Вулиця рiчна 19А, Каменные Потоки, 39625, Украина',
