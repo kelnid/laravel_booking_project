@@ -24,7 +24,7 @@ class CountryController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-//        dd($search);
+
         $countries = Country::where('name', 'LIKE', "%{$search}%")->orderBy('name')->get();
 
         return view('user.countries.index', compact('countries'));

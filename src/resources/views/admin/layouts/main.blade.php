@@ -9,6 +9,27 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+    <style>
+        .portfolio-menu ul li{
+            display:inline-block;
+            margin:0;
+            list-style:none;
+            padding:10px 15px;
+            cursor:pointer;
+            -webkit-transition:all 05s ease;
+            -moz-transition:all 05s ease;
+            -ms-transition:all 05s ease;
+            -o-transition:all 05s ease;
+            transition:all .5s ease;
+        }
+        .portfolio-item .item{
+            float:left;
+            margin-bottom:10px;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header>
@@ -62,7 +83,6 @@
     <div class="container">
         @include('admin.layouts._alert')
     </div>
-
     @yield('content')
 </main>
 <footer class="text-muted py-5">
@@ -82,6 +102,25 @@
     $(document).on('click','.delete',function(){
         let id = $(this).attr('data-id');
         $('#id').val(id);
+    });
+    $('.portfolio-menu ul li').click(function(){
+        $('.portfolio-menu ul li').removeClass('active');
+        $(this).addClass('active');
+
+        let selector = $(this).attr('data-filter');
+        $('.portfolio-item').isotope({
+            filter:selector
+        });
+        return  false;
+    });
+    $(document).ready(function() {
+        let popup_btn = $('.popup-btn');
+        popup_btn.magnificPopup({
+            type : 'image',
+            gallery : {
+                enabled : true
+            }
+        });
     });
 </script>
 </body>

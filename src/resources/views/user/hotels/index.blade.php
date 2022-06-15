@@ -10,9 +10,9 @@
                 <div class="card h-100">
                     <img src="{{ asset("storage/$hotel->image") }}" class="card-img-top" alt="{{ $hotel->name }}" style="max-width: 450px; max-height: 217px">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $hotel->name }}</h5>
-                        <h5 class="card-title">{{ $hotel->address }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ $hotel->country->name }}</h6>
+                        <p class="card-title">{{ $hotel->name }}</p>
+                        <p class="card-title">{{ $hotel->address }}</p>
+                        <p class="card-subtitle mb-2 text-muted">{{ $hotel->country->name }}</p>
                         <a href="{{ route('user.hotels.show', ['hotel' => $hotel->id]) }}" class="card-link">Подробнее</a>
                     </div>
                 </div>

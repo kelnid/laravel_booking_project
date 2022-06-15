@@ -3,7 +3,17 @@
 @section('title', 'Номер')
 
 @section('content')
-    <h1 class="title">Номер - {{ $room->name }}</h1>
+    <div class="container" style="padding-top: 200px">
+        <div class="portfolio-item row">
+            @foreach($images as $image)
+                <div class="item selfie col-lg-3 col-md-4 col-6 col-sm">
+                    <a href="{{ asset("storage/$image->image") }}" class="fancylight popup-btn" data-fancybox-group="light">
+                        <img src="{{ asset("storage/$image->image") }}" alt="hy" style="width: 200px; height: 200px">
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
     <div class="container">
         <div class="row row-cols-3">
             <div class="col">
@@ -22,7 +32,8 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Удалить</button>
                         </form>
-                        <form method="POST" action="{{ route('admin.bookings.store') }}" class="create-task-form">
+                        <form method="POST" action="{{ route('hotels.bookings.storeBooking') }}"
+                              class="create-task-form">
                             @csrf
                             <input type="hidden" name="room_id" value="{{ $room->id }}">
                             <div class="form-group">
@@ -36,9 +47,25 @@
                             @error('settlement_date')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <button type="submit" class="btn btn-primary">Забронировать</button>
+                            <button data-toggle="modal" data-target-id="1" data-target="#myModal" type="submit"
+                                    class="btn btn-primary">Забронировать
+                            </button>
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <strong>Вы успешно забронировали номер!</strong>
                 </div>
             </div>
         </div>

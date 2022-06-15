@@ -51,15 +51,20 @@ class RoomController extends Controller
 
         $users = User::all();
 
+
         return view('admin.rooms.show', ['room' => $room, 'bookings' => $bookings, 'users' => $users]);
     }
 
-    public function showRoom($id)
+    public function showRoom($id, $roomId = null)
     {
         $room = Room::find($id);
-
-        $images = RoomImage::all();
-
+//        $images = RoomImage::all();
+        if ($roomId) {
+            $images = RoomImage::where('room_id', $roomId)->get();
+        } else {
+            $images = RoomImage::all();
+        }
+//        dd($images);
         return view('user.rooms.show', ['room' => $room, 'images' => $images]);
     }
 

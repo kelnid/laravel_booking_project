@@ -17,12 +17,11 @@
         <form method="get" action=" {{ route('user.countries.search') }}">
             <div class="container">
                 <div class="row height d-flex justify-content-center align-items-center">
-                    <div class="col-md-8">
-                        <div class="search">
-                            <i class="fa fa-search"></i>
+                    <div class="col-md-9" style="display: flex; flex-direction: row">
+                        <div >
                             <input type="text" class="form-control" placeholder="search" id="search" name="search">
-                            <button class="btn btn-primary">Search</button>
                         </div>
+                        <button class="btn btn-primary">Search</button>
                     </div>
                 </div>
             </div>

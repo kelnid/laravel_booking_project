@@ -6,6 +6,7 @@ use App\Http\Requests\HotelRequest;
 use App\Models\Country;
 use App\Models\Hotel;
 use App\Models\Room;
+use App\Models\RoomImage;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
@@ -23,7 +24,8 @@ class HotelController extends Controller
         } else {
             $rooms = Room::all();
         }
-        return view('admin.hotels.index', ['hotels' => $hotels], ['rooms' => $rooms]);
+
+        return view('admin.hotels.index', ['hotels' => $hotels, 'rooms' => $rooms]);
     }
 
     public function indexHotel($countryId = null)
@@ -63,7 +65,6 @@ class HotelController extends Controller
         } else {
             $rooms = Room::all();
         }
-
         return view('admin.hotels.show', ['hotel' => $hotel], ['rooms' => $rooms]);
     }
 

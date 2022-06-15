@@ -4,8 +4,9 @@
 
 @section('content')
     <div class="container" style="padding-top: 200px">
+        <input type="hidden" name="room_id" value="{{ $room->id }}">
         <div class="portfolio-item row">
-            @foreach($images as $image)
+            @foreach($room->roomImages as $image)
                 <div class="item selfie col-lg-3 col-md-4 col-6 col-sm">
                     <a href="{{ asset("storage/$image->image") }}" class="fancylight popup-btn" data-fancybox-group="light">
                         <img src="{{ asset("storage/$image->image") }}" alt="hy" style="width: 200px; height: 200px">
@@ -53,9 +54,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">×</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <strong>Вы успешно забронировали номер!</strong>

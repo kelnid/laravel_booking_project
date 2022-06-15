@@ -65,7 +65,7 @@ class LoginController extends Controller
     public function validationError()
     {
         return [
-            $this->username() . '.exists' => 'The selected email is invalid or you need to active your account'
+            $this->username() . '.exists' => 'Такой почты не найдено,подтвердите свой аккаунт'
         ];
     }
 }

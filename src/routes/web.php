@@ -4,6 +4,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -123,6 +124,13 @@ Route::group([
     ], function () {
         Route::post('/', [CommentsController::class, 'store'])->name('store');
         Route::put('/{comment}', [CommentsController::class, 'update'])->name('update');
+    });
+    Route::group([
+        'as' => 'rating.',
+        'prefix' => 'rating'
+    ], function () {
+        Route::post('/', [RatingController::class, 'store'])->name('store');
+        Route::get('/get/{hotel}', [RatingController::class, 'show'])->name('show');
     });
 });
 
