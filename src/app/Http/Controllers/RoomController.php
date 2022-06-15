@@ -46,7 +46,9 @@ class RoomController extends Controller
     public function show($id)
     {
         $room = Room::find($id);
+
         $bookings = Booking::all();
+
         $users = User::all();
 
         return view('admin.rooms.show', ['room' => $room, 'bookings' => $bookings, 'users' => $users]);
@@ -55,6 +57,7 @@ class RoomController extends Controller
     public function showRoom($id)
     {
         $room = Room::find($id);
+
         $images = RoomImage::all();
 
         return view('user.rooms.show', ['room' => $room, 'images' => $images]);
@@ -70,7 +73,9 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->except('_token', '_method');
+
         $room = Room::find($id);
+
         $room->update($data);
 
         return redirect()->route('admin.rooms.show', ['room' => $id]);
@@ -79,6 +84,7 @@ class RoomController extends Controller
     public function destroy($id)
     {
         $room = Room::find($id);
+
         $room->delete();
 
         return redirect()->route('admin.countries.index');

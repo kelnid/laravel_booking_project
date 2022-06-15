@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RoomController;
@@ -26,7 +27,6 @@ Route::group([
         Route::put('/{country}', [CountryController::class, 'update'])->name('update');
         Route::delete('{country}', [CountryController::class, 'destroy'])->name('destroy');
     });
-
     Route::group([
         'as' => 'hotels.',
         'prefix' => 'hotels',
@@ -39,7 +39,6 @@ Route::group([
         Route::put('/{hotel}', [HotelController::class, 'update'])->name('update');
         Route::delete('/{hotel}', [HotelController::class, 'destroy'])->name('destroy');
     });
-
     Route::group([
         'as' => 'rooms.',
         'prefix' => 'rooms',
@@ -60,6 +59,14 @@ Route::group([
         Route::post('/', [BookingController::class, 'store'])->name('store');
         Route::put('/{booking}', [BookingController::class, 'update'])->name('update');
     });
+    Route::group([
+        'as' => 'comments.',
+        'prefix' => 'comments'
+    ], function () {
+        Route::get('/', [CommentsController::class, 'index'])->name('index');
+        Route::put('{hotel}/comments/{comment}', [CommentsController::class, 'update'])->name('update');
+        Route::delete('/destroy/{comment}', [CommentsController::class, 'destroy'])->name('destroy');
+    });
 });
 
 Route::group([
@@ -73,7 +80,6 @@ Route::group([
         Route::get('/', [CountryController::class, 'indexCountries'])->name('index');
         Route::get('/search', [CountryController::class, 'search'])->name('search');
     });
-
     Route::group([
         'as' => 'hotels.',
         'prefix' => 'hotels',
@@ -81,7 +87,6 @@ Route::group([
         Route::get('/{country?}', [HotelController::class, 'indexHotel'])->name('index');
         Route::get('/show/{hotel}', [HotelController::class, 'showHotel'])->name('show');
     });
-
     Route::group([
         'as' => 'rooms.',
         'prefix' => 'rooms',
@@ -111,6 +116,13 @@ Route::group([
         Route::get('/my-bookings', [BookingController::class, 'index'])->name('index');
         Route::post('/', [BookingController::class, 'storeBooking'])->name('storeBooking');
         Route::delete('/destroy/{room}', [BookingController::class, 'destroy'])->name('destroy');
+    });
+    Route::group([
+        'as' => 'comments.',
+        'prefix' => '{hotel}/comments',
+    ], function () {
+        Route::post('/', [CommentsController::class, 'store'])->name('store');
+        Route::put('/{comment}', [CommentsController::class, 'update'])->name('update');
     });
 });
 

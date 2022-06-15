@@ -13,20 +13,20 @@
                     </p>
                 </div>
             </div>
-            <form method="get" action=" {{ route('user.countries.search') }}">
-                <div class="container">
-                    <div class="row height d-flex justify-content-center align-items-center">
-                        <div class="col-md-8">
-                            <div class="search">
-                                <i class="fa fa-search"></i>
-                                <input type="text" class="form-control" placeholder="search" id="search" name="search">
-                                <button class="btn btn-primary">Search</button>
-                            </div>
+        </section>
+        <form method="get" action=" {{ route('user.countries.search') }}">
+            <div class="container">
+                <div class="row height d-flex justify-content-center align-items-center">
+                    <div class="col-md-8">
+                        <div class="search">
+                            <i class="fa fa-search"></i>
+                            <input type="text" class="form-control" placeholder="search" id="search" name="search">
+                            <button class="btn btn-primary">Search</button>
                         </div>
                     </div>
                 </div>
-            </form>
-        </section>
+            </div>
+        </form>
         <div class="album py-5 bg-light">
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

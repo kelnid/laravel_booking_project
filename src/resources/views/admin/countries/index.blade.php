@@ -56,8 +56,7 @@
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger">delete
-                                                    </button>
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">delete</button>
                                                 </form>
                                             </div>
                                         </div>

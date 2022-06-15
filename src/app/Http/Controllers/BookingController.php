@@ -29,7 +29,6 @@ class BookingController extends Controller implements ShouldQueue
         $data = $request->except('_token');
         $data['user_id'] = auth()->user()->id;
         RoomUser::create($data);
-//        return redirect()->route('hotels.bookings.index');
 
         $roomId = $data['room_id'];
 
