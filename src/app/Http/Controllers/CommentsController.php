@@ -10,7 +10,7 @@ class CommentsController extends Controller
 {
     public function index()
     {
-        $comments = Comment::paginate(15);
+        $comments = Comment::get();
         return view('admin.comments.index', ['comments' => $comments]);
     }
     public function store(CommentRequest $request, Hotel $hotel)
@@ -27,9 +27,7 @@ class CommentsController extends Controller
 
         $comment = Comment::find($id);
         $comment->update($data);
-        if (auth()->user()->role_id === 1) {
-            return redirect()->route('admin.comments.index');
-        }
+
         return redirect()->route('user.hotels.show', $hotel);
     }
     public function destroy($id)

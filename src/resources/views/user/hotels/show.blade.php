@@ -141,46 +141,51 @@
             </div>
         </div>
     </div>
-    <div class="card mb-3 mt-5" style="width: 1295px; height: auto; margin: 0 auto;">
-        <img src="{{ asset("storage/$hotel->image") }}" class="img-fluid"
-             alt="{{ $hotel->name }}">
-        <div class="card-body">
-            <h5 class="card-title"> {{ $hotel->name }}</h5>
-            <div class="stars mr-2">
-                <form action="{{route('hotels.rating.store')}}" class="class">
-                    <input type="hidden" name="get-rate" content="{{route('hotels.rating.show', $hotel->id)}}">
-                    <input type="hidden" name="csrf-token" content="{{ csrf_token() }}">
-                    <input type="hidden" class="hide" name="hotel_id" id="{{$hotel->id}}" data-set-value="{{$hotel->id}}">
-                    <input class="star star-10" id="star-10" type="radio" data-item-value="10" name="star"/>
-                    <label class="star star-10" for="star-10"></label>
-                    <input class="star star-9" id="star-9" type="radio" data-item-value="9" name="star"/>
-                    <label class="star star-9" for="star-9"></label>
-                    <input class="star star-8" id="star-8" type="radio" data-item-value="8" name="star"/>
-                    <label class="star star-8" for="star-8"></label>
-                    <input class="star star-7" id="star-7" type="radio" data-item-value="7" name="star"/>
-                    <label class="star star-7" for="star-7"></label>
-                    <input class="star star-6" id="star-6" type="radio" data-item-value="6" name="star"/>
-                    <label class="star star-6" for="star-6"></label>
-                    <input class="star star-5" id="star-5" type="radio" data-item-value="5" name="star"/>
-                    <label class="star star-5" for="star-5"></label>
-                    <input class="star star-4" id="star-4" type="radio" data-item-value="4" name="star"/>
-                    <label class="star star-4" for="star-4"></label>
-                    <input class="star star-3" id="star-3" type="radio" data-item-value="3" name="star"/>
-                    <label class="star star-3" for="star-3"></label>
-                    <input class="star star-2" id="star-2" type="radio" data-item-value="2" name="star"/>
-                    <label class="star star-2" for="star-2"></label>
-                    <input class="star star-1" id="star-1" type="radio" data-item-value="1" name="star"/>
-                    <label class="star star-1" for="star-1"></label>
-                </form>
-            </div>
-            <div class="mx-8">
-                <span id="exact-rating" class="mt-2 text-3xl"></span>
-            </div>
-            <h5 class="card-title">{{ $hotel->address }}</h5>
-            <p class="card-text">{{ $hotel->description }}</p>
-            <a data-toggle="modal" href="#myModal1" class="btn btn-primary">Оставить комментарий</a>
-        </div>
-    </div>
+   <div class="container" style="display: flex">
+       <div class="mt-5" style="padding-top: 830px; padding-right: 5px">
+           <div id="map" style="height: 150px; width: 300px"></div>
+       </div>
+       <div class="card mb-3 mt-5" style="width: 1295px; height: auto; margin: 0 auto;">
+           <img src="{{ asset("storage/$hotel->image") }}" class="img-fluid"
+                alt="{{ $hotel->name }}">
+           <div class="card-body">
+               <h5 class="card-title"> {{ $hotel->name }}</h5>
+               <div class="stars mr-2">
+                   <form action="{{route('hotels.rating.store')}}" class="class">
+                       <input type="hidden" name="get-rate" content="{{route('hotels.rating.show', $hotel->id)}}">
+                       <input type="hidden" name="csrf-token" content="{{ csrf_token() }}">
+                       <input type="hidden" class="hide" name="hotel_id" id="{{$hotel->id}}" data-set-value="{{$hotel->id}}">
+                       <input class="star star-10" id="star-10" type="radio" data-item-value="10" name="star"/>
+                       <label class="star star-10" for="star-10"></label>
+                       <input class="star star-9" id="star-9" type="radio" data-item-value="9" name="star"/>
+                       <label class="star star-9" for="star-9"></label>
+                       <input class="star star-8" id="star-8" type="radio" data-item-value="8" name="star"/>
+                       <label class="star star-8" for="star-8"></label>
+                       <input class="star star-7" id="star-7" type="radio" data-item-value="7" name="star"/>
+                       <label class="star star-7" for="star-7"></label>
+                       <input class="star star-6" id="star-6" type="radio" data-item-value="6" name="star"/>
+                       <label class="star star-6" for="star-6"></label>
+                       <input class="star star-5" id="star-5" type="radio" data-item-value="5" name="star"/>
+                       <label class="star star-5" for="star-5"></label>
+                       <input class="star star-4" id="star-4" type="radio" data-item-value="4" name="star"/>
+                       <label class="star star-4" for="star-4"></label>
+                       <input class="star star-3" id="star-3" type="radio" data-item-value="3" name="star"/>
+                       <label class="star star-3" for="star-3"></label>
+                       <input class="star star-2" id="star-2" type="radio" data-item-value="2" name="star"/>
+                       <label class="star star-2" for="star-2"></label>
+                       <input class="star star-1" id="star-1" type="radio" data-item-value="1" name="star"/>
+                       <label class="star star-1" for="star-1"></label>
+                   </form>
+               </div>
+               <div class="mx-8">
+                   <span id="exact-rating" class="mt-2 text-3xl"></span>
+               </div>
+               <h5 class="card-title">{{ $hotel->address }}</h5>
+               <p class="card-text">{{ $hotel->description }}</p>
+               <a data-toggle="modal" href="#myModal1" class="btn btn-primary">Оставить комментарий</a>
+           </div>
+       </div>
+   </div>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach($hotel->rooms as $room)

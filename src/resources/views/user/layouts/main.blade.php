@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Travelmore.com | @yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js">
+{{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js">--}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -15,6 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"/>
+
     <style>
         .portfolio-menu ul li {
             display: inline-block;
@@ -163,11 +164,13 @@
             integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
             crossorigin="anonymous">
     </script>
+
     <script>
         $(document).on('click', '.delete', function () {
             let id = $(this).attr('data-id');
             $('#id').val(id);
         });
+
         $('.portfolio-menu ul li').click(function () {
             $('.portfolio-menu ul li').removeClass('active');
             $(this).addClass('active');
@@ -178,6 +181,7 @@
             });
             return false;
         });
+
         $(document).ready(function () {
             let popup_btn = $('.popup-btn');
             popup_btn.magnificPopup({
@@ -187,6 +191,7 @@
                 }
             });
         });
+
         const inputAll = document.querySelectorAll('.class input');
 
         const token = document.querySelector('input[name="csrf-token"]').getAttribute('content');
@@ -221,10 +226,8 @@
                 });
         }))
 
-        //GET Request
         const urlGetMethod = document.querySelector('input[name="get-rate"]').getAttribute('content');
         const urlGetMethodNew = document.querySelector('input[name="get-rate"]').getAttribute('content');
-
 
         fetch(urlGetMethod)
             .then((response) => {
@@ -245,7 +248,6 @@
 
                 span.textContent = rate;
             });
-
         inputAll.forEach(input => {
             input.addEventListener('click', () => setTimeout(function () {
                 fetch(urlGetMethodNew)
@@ -269,6 +271,22 @@
                     },);
             }, 1000));
         })
+        function initMap() {
+            const myLatLng = { lat: 30.2734719, lng: 40.7512559 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 5,
+                center: myLatLng,
+            });
+
+            new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title: "Hello Rajkot!",
+            });
+        }
+
+        window.initMap = initMap;
     </script>
+    <script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"></script>
 </body>
 </html>

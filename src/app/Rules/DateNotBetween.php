@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\Booking;
+use App\Models\RoomUser;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Contracts\Validation\DataAwareRule;
 
@@ -29,13 +29,13 @@ class DateNotBetween implements Rule, DataAwareRule
      */
     public function passes($attribute, $value)
     {
-        $firstPartOfTheRequest = Booking::where('room_id',$this->data['room_id'])
+        $firstPartOfTheRequest = RoomUser::where('room_id',$this->data['room_id'])
             ->whereBetween('settlement_date',[$this->data['settlement_date'],$this->data['release_date']])
             ->orWhereBetween('release_date',[$this->data['settlement_date'],$this->data['release_date']])
             ->where('room_id',$this->data['room_id'])
             ->count();
 
-        $secondPartOfTheRequest = Booking::where('room_id',$this->data['room_id'])
+        $secondPartOfTheRequest = RoomUser::where('room_id',$this->data['room_id'])
             ->where('settlement_date','<=',$this->data['settlement_date'])
             ->where('release_date','>=',$this->data['settlement_date'])
             ->count();

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RoomController;
@@ -142,3 +143,4 @@ Route::post('auth/activate/resend', [App\Http\Controllers\Auth\ActivationResendC
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('auto-complete', [GoogleController::class, 'index']);

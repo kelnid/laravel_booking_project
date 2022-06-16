@@ -19,9 +19,9 @@
                 <div class="row height d-flex justify-content-center align-items-center">
                     <div class="col-md-9" style="display: flex; flex-direction: row">
                         <div >
-                            <input type="text" class="form-control" placeholder="search" id="search" name="search">
+                            <input type="text" class="form-control" placeholder="Поиск" id="search" name="search">
                         </div>
-                        <button class="btn btn-primary">Search</button>
+                        <button class="btn btn-primary">Поиск</button>
                     </div>
                 </div>
             </div>

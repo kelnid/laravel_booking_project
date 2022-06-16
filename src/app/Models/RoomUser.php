@@ -10,5 +10,5 @@ class RoomUser extends Pivot
     use HasFactory;
 
     protected $table = 'room_user';
-    protected $fillable = ['user_id', 'room_id'];
+    protected $fillable = ['user_id', 'room_id','settlement_date','release_date'];
 }
