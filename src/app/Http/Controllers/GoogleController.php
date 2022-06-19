@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GoogleController extends Controller
 {
-    public function index(Request $request) {
-
-        return view("googleAutocomplete");
-
+    public function index()
+    {
+        return view('googleAutocomplete');
     }
 }

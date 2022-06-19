@@ -34,7 +34,7 @@ Route::group([
         'prefix' => 'hotels',
     ], function () {
         Route::get('/{country?}', [HotelController::class, 'index'])->name('index');
-        Route::get('/create/test', [HotelController::class, 'create'])->name('create');
+        Route::get('/{country?}/create', [HotelController::class, 'create'])->name('create');
         Route::post('/', [HotelController::class, 'store'])->name('store');
         Route::get('/show/{hotel}', [HotelController::class, 'show'])->name('show');
         Route::get('/{hotel}/edit', [HotelController::class, 'edit'])->name('edit');
@@ -46,7 +46,7 @@ Route::group([
         'prefix' => 'rooms',
     ], function () {
         Route::get('/{hotel?}', [RoomController::class, 'index'])->name('index');
-        Route::get('/create/test', [RoomController::class, 'create'])->name('create');
+        Route::get('/{hotel?}/create', [RoomController::class, 'create'])->name('create');
         Route::post('/', [RoomController::class, 'store'])->name('store');
         Route::get('/show/{room}', [RoomController::class, 'show'])->name('show');
         Route::get('/{room}/edit', [RoomController::class, 'edit'])->name('edit');
@@ -65,7 +65,6 @@ Route::group([
         'as' => 'comments.',
         'prefix' => 'comments'
     ], function () {
-        Route::get('/', [CommentsController::class, 'index'])->name('index');
         Route::put('{hotel}/comments/{comment}', [CommentsController::class, 'update'])->name('update');
         Route::delete('/destroy/{comment}', [CommentsController::class, 'destroy'])->name('destroy');
     });
@@ -96,15 +95,6 @@ Route::group([
         Route::get('/{hotel?}', [RoomController::class, 'indexRooms'])->name('index');
         Route::get('/show/{room}', [RoomController::class, 'showRoom'])->name('show');
     });
-    Route::group([
-        'as' => 'bookings.',
-        'prefix' => 'bookings',
-    ], function () {
-        Route::get('/create/test', [BookingController::class, 'create'])->name('create');
-        Route::post('/', [BookingController::class, 'store'])->name('store');
-        Route::put('/{booking}', [BookingController::class, 'update'])->name('update');
-        Route::delete('/{booking}', [BookingController::class, 'destroy'])->name('destroy');
-    });
 });
 
 Route::group([
@@ -117,7 +107,7 @@ Route::group([
     ], function () {
         Route::get('/my-bookings', [BookingController::class, 'index'])->name('index');
         Route::post('/', [BookingController::class, 'storeBooking'])->name('storeBooking');
-        Route::delete('/destroy/{room}', [BookingController::class, 'destroy'])->name('destroy');
+        Route::delete('/destroy/{id}', [BookingController::class, 'destroy'])->name('destroy');
     });
     Route::group([
         'as' => 'comments.',
@@ -143,4 +133,4 @@ Route::post('auth/activate/resend', [App\Http\Controllers\Auth\ActivationResendC
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('auto-complete', [GoogleController::class, 'index']);
+Route::get('google-autocomplete', [GoogleController::class, 'index']);

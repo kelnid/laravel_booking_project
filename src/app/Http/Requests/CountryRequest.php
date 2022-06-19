@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HotelRequest extends FormRequest
+class CountryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,17 @@ class HotelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:50',
-            'address' => 'required|string|min:3',
-            'description' => 'required|string|min:3',
-            'image' => 'required|image'
+            'name' => 'required|string|min:3|max:50',
+            'image' => 'required|image|mimes:jpeg,jpg,png,gif|max:10000'
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'Нужно заполнить название',
-            'address.required' => 'Нужно заполнить адрес',
-            'description.required' => 'Нужно заполнить описание',
-            'image.required' => 'Нужно добавить картинку'
+            'image.required' => 'Нужно добавить картинку',
+            'image.image' => 'Неверный формат',
+            'image.mimes:jpeg,jpg,png,gif' => 'Неверный формат'
         ];
     }
 }

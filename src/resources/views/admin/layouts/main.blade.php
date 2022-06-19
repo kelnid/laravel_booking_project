@@ -4,32 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Page - @yield('title')</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
-    <style>
-        .portfolio-menu ul li{
-            display:inline-block;
-            margin:0;
-            list-style:none;
-            padding:10px 15px;
-            cursor:pointer;
-            -webkit-transition:all 05s ease;
-            -moz-transition:all 05s ease;
-            -ms-transition:all 05s ease;
-            -o-transition:all 05s ease;
-            transition:all .5s ease;
-        }
-        .portfolio-item .item{
-            float:left;
-            margin-bottom:10px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"/>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header>
@@ -85,43 +70,11 @@
     </div>
     @yield('content')
 </main>
-<footer class="text-muted py-5">
-    <div class="container">
-        <p class="float-end mb-1">
-            <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.2/getting-started/introduction/">getting started guide</a>.</p>
-    </div>
-</footer>
 <script src="https://getbootstrap.com/docs/5.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous">
 </script>
-<script>
-    $(document).on('click','.delete',function(){
-        let id = $(this).attr('data-id');
-        $('#id').val(id);
-    });
-    $('.portfolio-menu ul li').click(function(){
-        $('.portfolio-menu ul li').removeClass('active');
-        $(this).addClass('active');
-
-        let selector = $(this).attr('data-filter');
-        $('.portfolio-item').isotope({
-            filter:selector
-        });
-        return  false;
-    });
-    $(document).ready(function() {
-        let popup_btn = $('.popup-btn');
-        popup_btn.magnificPopup({
-            type : 'image',
-            gallery : {
-                enabled : true
-            }
-        });
-    });
-</script>
+<script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"></script>
+<script type="text/javascript" src="{{ asset('js/myjs.js') }}"></script>
 </body>
 </html>

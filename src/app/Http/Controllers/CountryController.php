@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CountryRequest;
 use App\Models\Country;
+use App\Models\User;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 
-class CountryController extends Controller
+class CountryController extends Controller implements ShouldQueue
 {
     public function index()
     {
@@ -37,7 +40,7 @@ class CountryController extends Controller
         return view('admin.countries.create', ['countries' => $countries]);
     }
 
-    public function store(Request $request)
+    public function store(CountryRequest $request)
     {
         $data = $request->except('_token');
 
@@ -47,15 +50,15 @@ class CountryController extends Controller
 
         return redirect()->route('admin.countries.index');
     }
+
     public function edit($id)
     {
         $country = Country::find($id);
 
         return view('admin.countries.edit', ['country' => $country]);
-
     }
 
-    public function update(Request $request, $id)
+    public function update(CountryRequest $request, $id)
     {
         $data = $request->except('_token', '_method');
         if ($request->hasFile('image')) {

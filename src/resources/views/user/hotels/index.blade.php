@@ -13,7 +13,7 @@
                         <p class="card-title">{{ $hotel->name }}</p>
                         <p class="card-title">{{ $hotel->address }}</p>
                         <p class="card-subtitle mb-2 text-muted">{{ $hotel->country->name }}</p>
-                        <a href="{{ route('user.hotels.show', ['hotel' => $hotel->id]) }}" class="card-link">Подробнее</a>
+                        <a href="{{ route('user.hotels.show', ['hotel' => $hotel->id]) }}" class="btn btn-primary">Подробнее</a>
                     </div>
                 </div>
             </div>

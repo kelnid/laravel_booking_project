@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RoomRequest;
-use App\Models\Booking;
 use App\Models\Hotel;
 use App\Models\Room;
 use App\Models\RoomImage;
+use App\Models\RoomUser;
 use App\Models\User;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -23,11 +24,11 @@ class RoomController extends Controller
         return view('user.rooms.index', ['rooms' => $rooms]);
     }
 
-    public function create()
+    public function create($id = null)
     {
-        $hotels = Hotel::all();
+        $hotel = Hotel::find($id);
 
-        return view('admin.rooms.create', ['hotels' => $hotels]);
+        return view('admin.rooms.create', ['hotel' => $hotel]);
     }
 
     public function store(RoomRequest $request)
@@ -47,25 +48,26 @@ class RoomController extends Controller
     {
         $room = Room::find($id);
 
-        $bookings = Booking::all();
-
-        $users = User::all();
-
-
-        return view('admin.rooms.show', ['room' => $room, 'bookings' => $bookings, 'users' => $users]);
+        return view('admin.rooms.show', ['room' => $room]);
     }
 
-    public function showRoom($id, $roomId = null)
+    public function showRoom($id)
     {
         $room = Room::find($id);
 
-        if ($roomId) {
-            $images = RoomImage::where('room_id', $roomId)->get();
-        } else {
-            $images = RoomImage::all();
-        }
+        $dates = RoomUser::whereRoomId($room->id)->get(['settlement_date', 'release_date']);
+//        dd($dates);
+        $datesRange = [];
 
-        return view('user.rooms.show', ['room' => $room, 'images' => $images]);
+        foreach ($dates as $date) {
+            $period = CarbonPeriod::create($date->settlement_date, $date->release_date);
+
+            foreach ($period as $per) {
+                $datesRange[] = $per->format('j-n-Y');
+            }
+        }
+//        dd($datesRange);
+        return view('user.rooms.show', ['room' => $room, 'range' => $datesRange]);
     }
 
     public function edit($id)
@@ -75,7 +77,7 @@ class RoomController extends Controller
         return view('admin.rooms.edit', ['room' => $room]);
     }
 
-    public function update(Request $request, $id)
+    public function update(RoomRequest $request, $id)
     {
         $data = $request->except('_token', '_method');
 
@@ -92,6 +94,6 @@ class RoomController extends Controller
 
         $room->delete();
 
-        return redirect()->route('admin.countries.index');
+        return redirect()->route('admin.hotels.index');
     }
 }

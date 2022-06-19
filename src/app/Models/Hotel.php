@@ -23,8 +23,12 @@ class Hotel extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    public function ratings()
+    public function rating()
     {
         return $this->belongsToMany(Rating::class, 'ratings');
+    }
+    public function location()
+    {
+        return $this->hasOne(Location::class);
     }
 }

@@ -27,6 +27,7 @@ class RoomRequest extends FormRequest
             'name' => 'required|string|min:3|max:100',
             'bed' => 'required|string|min:3|max:100',
             'area' => 'required|integer|min:3|max:100',
+            'price' => 'required|integer|min:3|max:10000',
         ];
     }
     public function messages()
@@ -35,6 +36,9 @@ class RoomRequest extends FormRequest
             'name.required' => 'Нужно заполнить название',
             'bed.required' => 'Нужно заполнить вид кровати',
             'area.required' => 'Нужно заполнить площадь комнаты',
+            'price.required' => 'Нужно заполнить стоимость комнаты',
+            'area.integer' => 'Площадь может быть только числом!',
+            'name.string' => 'Поле названия должно быть строкой!'
         ];
     }
 }

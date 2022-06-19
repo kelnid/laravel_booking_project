@@ -3,8 +3,8 @@
 @section('title', 'Добавить отель')
 
 @section('content')
-    <div class="container create-task-block">
-        <form method="POST" action="{{ route('admin.hotels.store') }}" class="create-task-form" enctype="multipart/form-data">
+    <div class="container" style="padding-top: 200px; width: 800px">
+        <form method="POST" action="{{ route('admin.hotels.store', ['country' => $country]) }}" class="create-task-form" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Название</label>
@@ -29,10 +29,9 @@
             </div>
             <div class="form-group">
                 <label for="country">Страна</label>
-                <select class="form-control" id="country_id" name="country_id">
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}">{{ $country->name }}</option>
-                    @endforeach
+                <select class="form-control" id="country" name="country_id">
+                        <option {{ $country === $country->id ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->name }}
+                        </option>
                 </select>
             </div>
             <div class="form-group">

@@ -3,8 +3,8 @@
 @section('title', "Редактировать отель $hotel->name")
 
 @section('content')
-    <div class="container create-task-block">
-        <form action="{{ route('admin.hotels.update', ['hotel' => $hotel->id]) }}" method="POST" class="create-task-form" enctype="multipart/form-data">
+    <div class="container" style="padding-top: 200px; width: 800px">
+        <form action="{{ route('admin.hotels.update', ['hotel' => $hotel->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">

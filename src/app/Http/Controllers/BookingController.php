@@ -3,39 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookingRequest;
+use App\Jobs\SendBookingInfoJob;
 use App\Models\Room;
 use App\Models\RoomUser;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 
 class BookingController extends Controller implements ShouldQueue
 {
     public function index()
     {
-        $rooms = Room::whereHas('users', function (Builder $query) {
-            $query->where('user_id', auth()->user()->id);
-        })->get();
-        $bookings = RoomUser::all();
+        $bookings = User::find(auth()->user()->id)->rooms;
 
-        return view('user.bookings.index', ['rooms' => $rooms],['bookings' => $bookings]);
+        return view('user.bookings.index', ['bookings' => $bookings]);
     }
 
     public function storeBooking(BookingRequest $request)
     {
         $data = $request->except('_token');
+
         $data['user_id'] = auth()->user()->id;
+
         RoomUser::create($data);
 
-        return redirect()->route('hotels.bookings.index');
+        $booking = RoomUser::all()->where('user_id', auth()->user()->id)->first();
+
+        $userInfo = [
+            'email' => auth()->user()->email,
+            'name' => auth()->user()->name
+        ];
+
+        SendBookingInfoJob::dispatch($booking, $userInfo);
+
+        return redirect()->route('hotels.bookings.index',['booking' => $booking]);
     }
 
-    public function destroy($id)
+    public function destroy($roomUser)
     {
-//        RoomUser::where('user_id', auth()->user()->id)->delete();
-        $booking = RoomUser::find($id);
-
-        $booking->delete();
+        $user = User::find(auth()->user()->id);
+        $user->rooms()->wherePivot('id',$roomUser)->detach();
 
         return redirect()->route('hotels.bookings.index');
     }

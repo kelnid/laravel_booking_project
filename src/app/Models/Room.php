@@ -15,16 +15,12 @@ class Room extends Model
     {
         return $this->belongsTo(Hotel::class);
     }
-    public function bookings()
-    {
-        return $this->hasMany(RoomUser::class);
-    }
     public function images()
     {
         return $this->hasMany(RoomImage::class);
     }
     public function users()
     {
-        return $this->belongsToMany(User::class)->using(RoomUser::class);
+        return $this->belongsToMany(User::class)->using(RoomUser::class)->withPivot('settlement_date', 'release_date');
     }
 }

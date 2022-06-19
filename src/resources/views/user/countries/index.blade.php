@@ -13,28 +13,28 @@
                     </p>
                 </div>
             </div>
-        </section>
-        <form method="get" action=" {{ route('user.countries.search') }}">
-            <div class="container">
-                <div class="row height d-flex justify-content-center align-items-center">
-                    <div class="col-md-9" style="display: flex; flex-direction: row">
-                        <div >
-                            <input type="text" class="form-control" placeholder="Поиск" id="search" name="search">
+            <form method="get" action=" {{ route('user.countries.search') }}">
+                <div class="container">
+                    <div class="row height d-flex justify-content-center align-items-center">
+                        <div class="col-md-8">
+                            <div class="search" style="display: flex">
+                                <input type="text" class="form-control" placeholder="Поиск" id="search" name="search">
+                                <button class="btn btn-primary">Поиск</button>
+                            </div>
                         </div>
-                        <button class="btn btn-primary">Поиск</button>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </section>
         <div class="album py-5 bg-light">
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     @foreach($countries as $country)
-                        <div class="col">
+                        <div class="col h-100">
                             <a href="{{ route('user.hotels.index', ['country' => $country->id]) }}">
-                                <div class="card shadow-sm">
-                                    <div style="position: relative; text-align: center; color: black; font-size: larger">
-                                        <img src="{{ asset("storage/$country->image") }}" class="img-fluid rounded-start"
+                                <div class="card shadow-sm h-100">
+                                    <div class="h-100" style="position: relative; text-align: center; color: black; font-size: larger">
+                                        <img src="{{ asset("storage/$country->image") }}" class="img-fluid rounded-start h-100"
                                              alt="{{ $country->name }} " >
                                         <div class="top-left" style="position: absolute; top: 8px; left: 16px;">{{ $country->name }}</div>
                                     </div>
@@ -59,10 +59,9 @@
                 <div class="container">
                     <div class="row height d-flex justify-content-center align-items-center">
                         <div class="col-md-8">
-                            <div class="search">
-                                <i class="fa fa-search"></i>
-                                <input type="text" class="form-control" placeholder="search" id="search" name="search">
-                                <button class="btn btn-primary">Search</button>
+                            <div class="search" style="display: flex">
+                                <input type="text" class="form-control" placeholder="Поиск" id="search" name="search">
+                                <button class="btn btn-primary">Поиск</button>
                             </div>
                         </div>
                     </div>

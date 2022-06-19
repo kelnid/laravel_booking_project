@@ -21,4 +21,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class)->withPivot('settlement_date', 'release_date','id');
+    }
 }

@@ -1,10 +1,10 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Создать задачу')
+@section('title', 'Создать комнату')
 
 @section('content')
-    <div class="container create-task-block">
-        <form method="POST" action="{{ route('admin.rooms.store') }}" class="create-task-form">
+    <div class="container" style="padding-top: 200px; width: 800px">
+        <form method="POST" action="{{ route('admin.rooms.store', ['hotel' => $hotel]) }}" class="create-task-form">
             @csrf
             <div class="form-group">
                 <label for="name">Название</label>
@@ -36,10 +36,9 @@
             </div>
             <div class="form-group">
                 <label for="hotel">Отель</label>
-                <select class="form-control" id="hotel" name="hotel">
-                    @foreach($hotels as $hotel)
-                        <option value="{{ $hotel->id }}">{{ $hotel->name }}</option>
-                    @endforeach
+                <select class="form-control" id="country" name="country_id">
+                    <option {{ $hotel === $hotel->id ? 'selected' : '' }} value="{{ $hotel->id }}">{{ $hotel->name }}
+                    </option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Создать</button>

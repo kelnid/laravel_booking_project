@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\HotelRequest;
 use App\Models\Country;
 use App\Models\Hotel;
+use App\Models\Location;
+use App\Models\Rating;
 use App\Models\Room;
 use App\Models\RoomImage;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
 {
@@ -38,11 +42,11 @@ class HotelController extends Controller
         return view('user.hotels.index', ['hotels' => $hotels]);
     }
 
-    public function create()
+    public function create($id = null)
     {
-        $countries = Country::all();
+        $country = Country::find($id);
 
-        return view('admin.hotels.create', ['countries' => $countries]);
+        return view('admin.hotels.create', ['country' => $country]);
     }
 
     public function store(HotelRequest $request)
@@ -56,28 +60,35 @@ class HotelController extends Controller
         return redirect()->route('admin.countries.index');
     }
 
-    public function show($id, $hotelId = null)
+    public function show($id)
     {
         $hotel = Hotel::find($id);
 
-        if ($hotelId) {
-            $rooms = Room::where('hotel_id', $hotelId)->get();
-        } else {
-            $rooms = Room::all();
-        }
-        return view('admin.hotels.show', ['hotel' => $hotel], ['rooms' => $rooms]);
+        $markers = $hotel->location;
+
+        return view('admin.hotels.show', ['hotel' => $hotel], ['markers' => $markers]);
     }
 
-    public function showHotel($id)
+    public function showHotel($id, $hotelId = null)
     {
+        if ($hotelId) {
+            $votes = Rating::where('hotel_id', $hotelId)->get();
+        } else {
+            $votes = Rating::all();
+        }
+
+//        dd($votes);
         $hotel = Hotel::find($id);
 
-        return view('user.hotels.show', ['hotel' => $hotel]);
+        $markers = $hotel->location;
+
+        return view('user.hotels.show', ['hotel' => $hotel,'markers' => $markers, 'users' => $votes]);
     }
 
     public function edit($id)
     {
         $hotel = Hotel::find($id);
+
         $countries = Country::all();
 
         return view('admin.hotels.edit', ['hotel' => $hotel, 'countries' => $countries]);

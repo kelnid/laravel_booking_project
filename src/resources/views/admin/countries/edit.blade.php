@@ -3,8 +3,8 @@
 @section('title', "Редактировать страну $country->name")
 
 @section('content')
-    <div class="container create-task-block">
-        <form action="{{ route('admin.countries.update', ['country' => $country->id]) }}" method="POST" class="create-task-form " enctype="multipart/form-data">
+    <div class="container" style="padding-top: 200px; width: 800px">
+        <form action="{{ route('admin.countries.update', ['country' => $country->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -13,8 +13,11 @@
             </div>
             <div class="form-group">
                 <label for="image" class="form-label">Изображение</label>
-                <input class="form-control" type="file" id="image" name="image">
+                <input class="form-control @error('name') is-invalid @enderror" type="file" id="image" name="image">
             </div>
+            @error('image')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
     </div>
