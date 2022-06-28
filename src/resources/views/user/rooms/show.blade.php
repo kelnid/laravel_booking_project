@@ -27,15 +27,16 @@
                             <form method="POST" action="{{ route('hotels.bookings.storeBooking') }}">
                                 @csrf
                                 <input type="hidden" name="room_id" value="{{ $room->id }}">
+                                <label for="settlement_date" style="color: black">Дата заезда</label>
                                 <input type="text" name="settlement_date"  readonly="readonly" size="12" class="date"/>
+                                <label for="release_date" style="color: black">Дата выезда</label>
                                 <input type="text" name="release_date"  readonly="readonly" size="12" class="date2"/>
                                 <script>
-
                                     var availableDates = <?php print json_encode($range) ?>;
-                                    console.log(availableDates);
+
                                     function available(date) {
-                                        dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
-                                        if ($.inArray(dmy, availableDates) !== -1) {
+                                        dates = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+                                        if ($.inArray(dates, availableDates) !== -1) {
                                             return [false, "","Available"];
                                         } else {
                                             return [true,"","unAvailable"];
@@ -43,15 +44,13 @@
                                     }
 
                                     $('.date').datepicker({ minDate:0, beforeShowDay: available });
-
                                 </script>
                                 <script>
-
                                     var availableDates = <?php print json_encode($range) ?>;
 
                                     function available(date) {
-                                        dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
-                                        if ($.inArray(dmy, availableDates) !== -1) {
+                                        dates = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+                                        if ($.inArray(dates, availableDates) !== -1) {
                                             return [false, "","Available"];
                                         } else {
                                             return [true,"","unAvailable"];
@@ -60,7 +59,6 @@
 
                                     $('.date2').datepicker({  minDate:0,  beforeShowDay: available });
                                 </script>
-
                                 <button type="submit" class="btn btn-primary">Забронировать</button>
                             </form>
                             @error('settlement_date')

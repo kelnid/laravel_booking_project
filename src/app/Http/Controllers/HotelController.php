@@ -76,8 +76,6 @@ class HotelController extends Controller
         } else {
             $votes = Rating::all();
         }
-
-//        dd($votes);
         $hotel = Hotel::find($id);
 
         $markers = $hotel->location;
